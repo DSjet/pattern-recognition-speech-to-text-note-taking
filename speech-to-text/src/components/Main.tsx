@@ -1,36 +1,37 @@
-import useSpeechRecognitionHook from "../hooks/useSpeechRecognitionHook";
+import { useState } from "react";
+import { nanoid } from "nanoid";
+import Navbar from "./Navbar";
+import NotesList from "./NotesList";
+import TakeNote from "./TakeNote";
 
 const Main = () => {
-  const {
-    text,
-    isListening,
-    startListening,
-    stopListening,
-    hasRecognitionSupport,
-  } = useSpeechRecognitionHook();
+  const [notes, setNotes] = useState([
+    {
+      id: nanoid(),
+      text: "Sample Note 1",
+      date: "31/05/2023",
+    },
+    {
+      id: nanoid(),
+      text: "Sample Note 2",
+      date: "12/05/2023",
+    },
+    {
+      id: nanoid(),
+      text: "Sample Note 3",
+      date: "28/05/2023",
+    },
+  ]);
+
+  const addNote = (text: string) => {
+    console.log(text);
+  };
+
   return (
     <div>
-      <h1>Speech to Text</h1>
-      {hasRecognitionSupport ? (
-        <>
-          <button
-            className=" bg-blue-400"
-            onClick={startListening}
-            disabled={isListening}
-          >
-            Start
-          </button>
-
-          {isListening ? <p>Listening...</p> : null}
-
-          <button onClick={stopListening} disabled={!isListening}>
-            Stop
-          </button>
-          {text ? <p>{text}</p> : null}
-        </>
-      ) : (
-        <p>Sorry, your browser doesn't support speech recognition.</p>
-      )}
+      <Navbar />
+      <TakeNote handleAddNote={addNote} />
+      <NotesList notes={notes} />
     </div>
   );
 };
