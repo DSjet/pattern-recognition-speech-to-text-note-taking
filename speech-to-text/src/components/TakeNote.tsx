@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import useSpeechRecognitionHook from "../hooks/useSpeechRecognitionHook";
+import { MdMic, MdSave } from "react-icons/md";
 
 interface TakeNoteProps {
   handleAddNote: (note: string) => void;
@@ -20,8 +21,8 @@ const TakeNote: React.FC<TakeNoteProps> = ({ handleAddNote }) => {
     setNoteText(text);
   }, [text]);
 
-  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setNoteText(event.target.value);
+  const handleChange = (event: ChangeEvent<HTMLParagraphElement>) => {
+    setNoteText(event.target.textContent || "");
   };
 
   const handleSaveClick = () => {
@@ -29,16 +30,17 @@ const TakeNote: React.FC<TakeNoteProps> = ({ handleAddNote }) => {
   };
 
   return (
-    <div className="bg-slate-400 p-2">
+    <div className="p-2">
       {hasRecognitionSupport ? (
-        <div className="flex flex-col w-1/2 items-center content-center mx-auto mt-20 space-y-10 bg-slate-300 py-10 rounded-lg mb-10">
-          <h1 className="text-4xl">Speech to Text</h1>
+        <div className="flex flex-col w-1/2 items-center content-center ml-3 mt-3 space-y-10 bg-slate-300 py-10 rounded-lg mb-10">
+          <div className="flex space-x-2 items-center">
+            <MdMic className=" h-10 w-10" />
+            <h1 className="text-4xl">Speech to Text</h1>
+          </div>
           {text ? (
-            <textarea
-              className="text-lg"
-              onChange={handleChange}
-              value={noteText}
-            />
+            <p className="text-lg" onChange={handleChange}>
+              {text}
+            </p>
           ) : null}
           {isListening ? <p className="text-lg">Listening...</p> : null}
           <div className="space-x-5">
@@ -58,13 +60,12 @@ const TakeNote: React.FC<TakeNoteProps> = ({ handleAddNote }) => {
               Stop
             </button>
           </div>
-
-          <small className="text-lg">200 words remaining</small>
           <button
-            className="text-xl bg-green-200 p-2 rounded-lg"
+            className="text-xl bg-green-200 p-2 rounded-lg flex items-center"
             onClick={handleSaveClick}
           >
             Save
+            <MdSave className="ml-2" />
           </button>
         </div>
       ) : (
