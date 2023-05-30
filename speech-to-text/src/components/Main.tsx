@@ -13,7 +13,11 @@ const Main = () => {
       <h1>Speech to Text</h1>
       {hasRecognitionSupport ? (
         <>
-          <button onClick={startListening} disabled={isListening}>
+          <button
+            className=" bg-blue-400"
+            onClick={startListening}
+            disabled={isListening}
+          >
             Start
           </button>
 
