@@ -32,10 +32,10 @@ const TakeNote: React.FC<TakeNoteProps> = ({ handleAddNote }) => {
   return (
     <div className="p-2">
       {hasRecognitionSupport ? (
-        <div className="flex flex-col w-1/2 items-center content-center ml-3 mt-3 space-y-10 bg-slate-300 py-10 rounded-lg mb-10">
+        <div className="flex flex-col md:w-1/4 items-center content-center ml-3 mt-3 space-y-10 bg-slate-300 py-10 rounded-lg mb-10">
           <div className="flex space-x-2 items-center">
-            <MdMic className=" h-10 w-10" />
-            <h1 className="text-4xl">Speech to Text</h1>
+            <MdMic className=" md:h-10 md:w-10" />
+            <h1 className="sm:text-xl md:text-4xl">Speech to Text</h1>
           </div>
           {text ? (
             <p className="text-lg" onChange={handleChange}>
