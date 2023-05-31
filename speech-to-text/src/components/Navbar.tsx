@@ -8,13 +8,13 @@ function Navbar() {
       <div className="mr-5">
         <ul className="flex space-x-5">
           <li>
-            <a href="/">Home</a>
+            <a href="#">Home</a>
           </li>
           <li>
-            <a className="">About</a>
+            <a href="#">About</a>
           </li>
           <li>
-            <a className="">Contact</a>
+            <a href="">Contact</a>
           </li>
         </ul>
       </div>
